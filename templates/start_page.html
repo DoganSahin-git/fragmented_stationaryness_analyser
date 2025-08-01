@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<body>
+    <div class="container">
+        <h2 style="text-align:left">Fragmented Stationaryness Analyser</h2>
+    
+        <div>
+            <p3 style="text-align:left">Fixedness in time series data is sought after for various reasons. With the help of linear regression adaptation test we are able measure whether a series of data is stationary or not. However in some kind of datum, specially in long series where underlying changes are inevitable, structural changes occur and overall evaluation might be insufficient. In this study, a more detailed analysis will be attempted by dividing time series into portions and detecting the most steady parts in a time series data. Please upload to evaluate one example excel datasheet.</p3>
+        </div>
+        <br>
+        <br>
+
+        <h1>Upload Excel File (.xlsx)</h1>
+            <form action="{{ url_for('view') }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file"
+                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <input type="submit" value="Upload">
+            </form>
+
+        <br>
+        <br>
+        
+        
+        <canvas id="myLineChart" width="380" height="180"></canvas>
+        
+        <script>
+        // data for showing the line chart
+        let labels = {{ labels | safe }};
+        let dataset1Data = {{ median_price | safe }};
+        let dataset2Data = {{ fixedness | safe }};
+
+        // Creating line chart
+        let ctx = 
+            document.getElementById('myLineChart').getContext('2d');
+        let myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Median Price',
+                        data: dataset1Data,
+                        borderColor: 'blue',
+                        borderWidth: 1,
+                        fill: false,
+                    },
+                    {
+                        label: 'Fixedness',
+                        data: dataset2Data,
+                        borderColor: 'green',
+                        borderWidth: 1,
+                        fill: false,
+                    },
+
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            font: {
+                                padding: 4,
+                                size: 20,
+                                weight: 'bold',
+                                family: 'Arial'
+                            },
+                            color: 'darkblue'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            font: {
+                                size: 20,
+                                weight: 'bold',
+                                family: 'Arial'
+                            },
+                            color: 'darkblue'
+                        },
+                        beginAtZero: false,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Values',
+                        }
+                    }
+                }
+            }
+        });
+        </script>
+ 
+        
+        
+        
+        
+        
+        
+        
+ 
+    </div>
+</body>
+</html>
+
+
