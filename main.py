@@ -197,8 +197,15 @@ def view():
 
             fixedness_percentage.append('NAN')
 
+    table_array= []
 
-    return render_template('start_page.html', labels=array_time, median_price=array_values, fixedness=fixedness_percentage)
+    for m in range(0,len(array_time)):
+
+        table_array.append([array_time[m], round(array_values[m], 4), fixedness_percentage[m]])
+
+
+
+    return render_template('start_page.html', labels=array_time, median_price=array_values, fixedness=fixedness_percentage, table_array=table_array)
 
 
 
