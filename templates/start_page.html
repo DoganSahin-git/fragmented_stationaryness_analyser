@@ -9,7 +9,18 @@
 
 </head>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='chart.js') }}"></script>
+
+<script src="{{ url_for('static', filename='jquery.js') }}"></script>
+
+
+<script>
+$("#files").change(function() {
+  filename = this.files[0].name;
+  console.log(filename);
+});
+</script>
+
 
 
 <body>
@@ -17,14 +28,15 @@
         <h2 style="text-align:left">Fragmented Stationaryness Analyser</h2>
     
         <div>
-            <p3 style="text-align:left">Upload excel file that is compatible with the example excel file. The script will calculate the median value and divides the time series data into fragments by stationaryness.</p3>
+            <p3 style="text-align:left">Select file and click to Upload sample excel file that is compatible. The script will calculate median values and divides the time series data into fragments by stationaryness.</p3>
         </div>
         <br>
         <br>
 
         <h1>Upload Excel File (.xlsx)</h1>
             <form action="{{ url_for('view') }}" method="post" enctype="multipart/form-data">
-                <input type="file" name="file"
+                <label for="files" class="btn">Click to Select File</label>
+                <input id="files" style="display:none;" type="file" name="file"
                     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                 <input type="submit" value="Upload">
             </form>
@@ -102,15 +114,34 @@
         });
         </script>
  
-        
-        
-        
-        
-        
-        
-        
  
     </div>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>time</th>
+                <th>median values</th>
+                <th>stationaryness</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for element in table_array %}
+                        
+            <tr>
+                <td>{{ element[0] }}</td>
+                        
+                <td>{{ element[1] }}</td>
+
+                <td>{{ element[2] }}</td>
+            </tr>
+                        
+            {% endfor %}
+
+        </tbody>
+    </table>
+
 </body>
 </html>
 
