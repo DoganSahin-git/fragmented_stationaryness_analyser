@@ -21,10 +21,10 @@ open a browser and give the adress 127.0.0.1:5000 to run the app
 <br/>
 ### Extra adjustments
 - Please leave default scale_table.json file as it is, if you are using the app for the first time.
-  Check to adjust scale_table.json for narrower or wider stationaryness measure splits. Wider intervals will cause less number of partials but longer result chucks in time
+  Check to adjust scale_table.json for narrower or wider stationaryness measure splits. Wider intervals will cause less number of partials but longer fixedness result chucks in time series.
   Here is one helper script to adjust intervals.
 ```
 python3 adjust_scale_table.py
 ```
 - under **def view():** there are two variables defined as ***start_count = 0*** and ***end_count = 2***
-  this sets the minimum fixedness calculation range. The range can't be less than 3 to constitute a linear like line with possible variation.
+  this sets the minimum fixedness calculation range. The range can't be less than 3 to constitute a linear like line with possible variation. However it can be adjusted to a longer fixedness result chucks in time series.
