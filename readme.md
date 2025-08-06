@@ -1,5 +1,5 @@
 ## Fragmented Stationaryness Analyser
-This python app, takes an .xlsx file as formed in sample-data.xlsx, calculates and ranks the most stationary parts of median value along with the whole time series data, plots and prints the result on a flask page. Please refer to [project tracking page](https://dogansahin-git.github.io/project-tracking-page) for screenshots and details.
+This python flask app, takes an .xlsx file as formed in sample-data.xlsx, calculates and ranks the most stationary parts of median value along with the whole time series data, plots and prints the result on a flask page. Please refer to [project tracking page](https://dogansahin-git.github.io/project-tracking-page) for screenshots and details.
 
 create virtual environment
 ```
