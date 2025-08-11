@@ -23,6 +23,34 @@ $("#files").change(function() {
 
 
 
+<script>
+function copyTable(el) {
+  var body = document.body,
+    range,
+    sel;
+  if (document.createRange && window.getSelection) {
+    range = document.createRange();
+    sel = window.getSelection();
+    sel.removeAllRanges();
+    try {
+      range.selectNodeContents(el);
+      sel.addRange(range);
+    } catch (e) {
+      range.selectNode(el);
+      sel.addRange(range);
+    }
+  } else if (body.createTextRange) {
+    range = body.createTextRange();
+    range.moveToElementText(el);
+    range.select();
+  }
+  document.execCommand("Copy");
+}
+</script>
+
+
+
+
 <body>
     <div class="container">
         <h2 style="text-align:left">Fragmented Stationaryness Analyser</h2>
@@ -117,7 +145,7 @@ $("#files").change(function() {
  
     </div>
 
-    <table class="styled-table">
+    <table id="table" class="styled-table">
         <thead>
             <tr>
                 <th>time</th>
@@ -141,6 +169,15 @@ $("#files").change(function() {
 
         </tbody>
     </table>
+
+    <br>
+    <br>
+    
+    <button id="copy" style="display: block; margin: auto;" class="button" type="button" onclick="copyTable(document.getElementById('table'))">Copy to Clipboard</button>
+    
+    <br>
+    <br>
+    
 
 </body>
 </html>
